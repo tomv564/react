@@ -216,26 +216,26 @@ describe('ReactDOMInput', function() {
   it('should warn with value and no onChange handler', function() {
     var link = new ReactLink('yolo', mocks.getMockFunction());
     ReactTestUtils.renderIntoDocument(<input type="text" valueLink={link} />);
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
 
     ReactTestUtils.renderIntoDocument(
       <input type="text" value="zoink" onChange={mocks.getMockFunction()} />
     );
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
     ReactTestUtils.renderIntoDocument(<input type="text" value="zoink" />);
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
   });
 
   it('should warn with value and no onChange handler and readOnly specified', function() {
     ReactTestUtils.renderIntoDocument(
       <input type="text" value="zoink" readOnly={true} />
     );
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
 
     ReactTestUtils.renderIntoDocument(
       <input type="text" value="zoink" readOnly={false} />
     );
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
   });
 
   it('should throw if both value and valueLink are provided', function() {
@@ -280,7 +280,7 @@ describe('ReactDOMInput', function() {
     var node = document.createElement('div');
     var link = new ReactLink(true, mocks.getMockFunction());
     React.render(<input type="checkbox" checkedLink={link} />, node);
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
 
     ReactTestUtils.renderIntoDocument(
       <input
@@ -289,27 +289,27 @@ describe('ReactDOMInput', function() {
         onChange={mocks.getMockFunction()}
       />
     );
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
 
     ReactTestUtils.renderIntoDocument(
       <input type="checkbox" checked="false" readOnly={true} />
     );
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
 
     ReactTestUtils.renderIntoDocument(<input type="checkbox" checked="false" />);
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
   });
 
   it('should warn with checked and no onChange handler with readOnly specified', function() {
     ReactTestUtils.renderIntoDocument(
       <input type="checkbox" checked="false" readOnly={true} />
     );
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
 
     ReactTestUtils.renderIntoDocument(
       <input type="checkbox" checked="false" readOnly={false} />
     );
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
   });
 
   it('should throw if both checked and checkedLink are provided', function() {

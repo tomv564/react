@@ -267,8 +267,8 @@ describe('ReactBrowserEventEmitter', function() {
     ReactTestUtils.Simulate.click(CHILD);
     expect(idCallOrder.length).toBe(1);
     expect(idCallOrder[0]).toBe(getID(CHILD));
-    expect(console.error.calls.length).toEqual(1);
-    expect(console.error.calls[0].args[0]).toBe(
+    expect(console.error.calls.count()).toEqual(1);
+    expect(console.error.calls.argsFor(0)[0]).toBe(
       'Warning: Returning `false` from an event handler is deprecated and ' +
       'will be ignored in a future release. Instead, manually call ' +
       'e.stopPropagation() or e.preventDefault(), as appropriate.'
@@ -389,7 +389,7 @@ describe('ReactBrowserEventEmitter', function() {
     spyOn(EventListener, 'listen');
     ReactBrowserEventEmitter.listenTo(ON_CLICK_KEY, document);
     ReactBrowserEventEmitter.listenTo(ON_CLICK_KEY, document);
-    expect(EventListener.listen.calls.length).toBe(1);
+    expect(EventListener.listen.calls.count()).toBe(1);
   });
 
   it('should work with event plugins without dependencies', function() {
@@ -397,7 +397,7 @@ describe('ReactBrowserEventEmitter', function() {
 
     ReactBrowserEventEmitter.listenTo(ON_CLICK_KEY, document);
 
-    expect(EventListener.listen.argsForCall[0][1]).toBe('click');
+    expect(EventListener.listen.calls.allArgs()[0][1]).toBe('click');
   });
 
   it('should work with event plugins with dependencies', function() {
@@ -407,8 +407,8 @@ describe('ReactBrowserEventEmitter', function() {
     ReactBrowserEventEmitter.listenTo(ON_CHANGE_KEY, document);
 
     var setEventListeners = [];
-    var listenCalls = EventListener.listen.argsForCall;
-    var captureCalls = EventListener.capture.argsForCall;
+    var listenCalls = EventListener.listen.calls.allArgs();
+    var captureCalls = EventListener.capture.calls.allArgs();
     for (var i = 0; i < listenCalls.length; i++) {
       setEventListeners.push(listenCalls[i][1]);
     }

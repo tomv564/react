@@ -46,7 +46,7 @@ describe('ReactMount', function() {
       var nodeArray = document.getElementsByTagName('div');
       expect(function() {
         React.unmountComponentAtNode(nodeArray);
-      }).toThrow(
+      }).toThrowError(
         'Invariant Violation: unmountComponentAtNode(...): Target container ' +
         'is not a DOM element.'
       );
@@ -56,7 +56,7 @@ describe('ReactMount', function() {
   it('throws when given a string', function() {
     expect(function() {
       ReactTestUtils.renderIntoDocument('div');
-    }).toThrow(
+    }).toThrowError(
       'Invariant Violation: React.render(): Invalid component element. ' +
       'Instead of passing an element string, make sure to instantiate it ' +
       'by passing it to React.createElement.'
@@ -71,7 +71,7 @@ describe('ReactMount', function() {
     });
     expect(function() {
       ReactTestUtils.renderIntoDocument(Component);
-    }).toThrow(
+    }).toThrowError(
       'Invariant Violation: React.render(): Invalid component element. ' +
       'Instead of passing a component class, make sure to instantiate it ' +
       'by passing it to React.createElement.'
@@ -163,8 +163,8 @@ describe('ReactMount', function() {
 
     ReactMount.render(<div />, iFrame.contentDocument.body);
 
-    expect(console.error.calls.length).toBe(1);
-    expect(console.error.calls[0].args[0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.argsFor(0)[0]).toContain(
       'Rendering components directly into document.body is discouraged'
     );
   });

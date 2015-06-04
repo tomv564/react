@@ -17,7 +17,7 @@ var ReactErrorUtils = require('ReactErrorUtils');
 describe('ReactCompositeComponent-error', function() {
 
   it('should be passed the component and method name', function() {
-    spyOn(ReactErrorUtils, 'guard').andCallThrough();
+    spyOn(ReactErrorUtils, 'guard').and.callThrough();
     var Component = React.createClass({
       someHandler: function() {},
       render: function() {
@@ -27,7 +27,7 @@ describe('ReactCompositeComponent-error', function() {
 
     void new Component();
 
-    expect(ReactErrorUtils.guard.mostRecentCall.args[1])
+    expect(ReactErrorUtils.guard.calls.mostRecent().args[1])
       .toEqual('Component.someHandler');
   });
 

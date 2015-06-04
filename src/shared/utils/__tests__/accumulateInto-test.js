@@ -25,8 +25,8 @@ describe('accumulateInto', function() {
   it('throws if the second item is null', function() {
     expect(function() {
       accumulateInto([], null);
-    }).toThrow(
-      'Invariant Violation: accumulateInto(...): Accumulated items must not ' +
+    }).toThrowError(
+       'Invariant Violation: accumulateInto(...): Accumulated items must not ' +
       'be null or undefined.'
     );
   });

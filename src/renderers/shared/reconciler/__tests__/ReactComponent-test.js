@@ -28,14 +28,14 @@ describe('ReactComponent', function() {
     // jQuery objects are basically arrays; people often pass them in by mistake
     expect(function() {
       React.render(<div></div>, [container]);
-    }).toThrow(
+    }).toThrowError(
       'Invariant Violation: _registerComponent(...): Target container ' +
       'is not a DOM element.'
     );
 
     expect(function() {
       React.render(<div></div>, null);
-    }).toThrow(
+    }).toThrowError(
       'Invariant Violation: _registerComponent(...): Target container ' +
       'is not a DOM element.'
     );
@@ -269,8 +269,8 @@ describe('ReactComponent', function() {
 
     instance.getDOMNode();
 
-    expect(console.error.calls.length).toBe(1);
-    expect(console.error.calls[0].args[0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.argsFor(0)[0]).toContain(
       'DIV.getDOMNode(...) is deprecated. Please use ' +
       'React.findDOMNode(instance) instead.'
     );

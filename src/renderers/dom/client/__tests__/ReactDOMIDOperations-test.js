@@ -30,17 +30,17 @@ describe('ReactDOMIDOperations', function() {
     }).toThrow();
 
     expect(
-      ReactMount.getNode.argsForCall[0][0]
+      ReactMount.getNode.calls.allArgs()[0][0]
     ).toBe('testID');
 
     expect(
-      DOMPropertyOperations.setValueForProperty.calls.length
+      DOMPropertyOperations.setValueForProperty.calls.count()
     ).toBe(0);
   });
 
   it('should update innerHTML and preserve whitespace', function() {
     var stubNode = document.createElement('div');
-    spyOn(ReactMount, 'getNode').andReturn(stubNode);
+    spyOn(ReactMount, 'getNode').and.returnValue(stubNode);
 
     var html = '\n  \t  <span>  \n  testContent  \t  </span>  \n  \t';
 
@@ -50,7 +50,7 @@ describe('ReactDOMIDOperations', function() {
     );
 
     expect(
-      ReactMount.getNode.argsForCall[0][0]
+      ReactMount.getNode.calls.allArgs()[0][0]
     ).toBe('testID');
 
     expect(stubNode.innerHTML).toBe(html);

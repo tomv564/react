@@ -109,7 +109,7 @@ describe('ReactElement', function() {
       children: 'text'
     }, a);
     expect(element.props.children).toBe(a);
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
   });
 
   it('does not override children if no rest args are provided', function() {
@@ -118,7 +118,7 @@ describe('ReactElement', function() {
       children: 'text'
     });
     expect(element.props.children).toBe('text');
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
   });
 
   it('overrides children if null is provided as an argument', function() {
@@ -127,7 +127,7 @@ describe('ReactElement', function() {
       children: 'text'
     }, null);
     expect(element.props.children).toBe(null);
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
   });
 
   it('merges rest arguments onto the children prop in an array', function() {
@@ -135,7 +135,7 @@ describe('ReactElement', function() {
     var a = 1, b = 2, c = 3;
     var element = React.createFactory(ComponentClass)(null, a, b, c);
     expect(element.props.children).toEqual([1, 2, 3]);
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
   });
 
   it('allows static methods to be called using the type property', function() {
@@ -157,7 +157,7 @@ describe('ReactElement', function() {
 
     var element = React.createElement(StaticMethodComponentClass);
     expect(element.type.someStaticMethod()).toBe('someReturnValue');
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
   });
 
   it('identifies valid elements', function() {
@@ -259,15 +259,15 @@ describe('ReactElement', function() {
     var outer = ReactTestUtils.renderIntoDocument(<Outer color="orange" />);
     expect(React.findDOMNode(outer).className).toBe('quack');
 
-    expect(console.error.argsForCall.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'Don\'t set .props.className of the React component <div />.'
     );
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'The element was created by Outer.'
     );
 
-    console.error.reset();
+    console.error.calls.reset();
 
     // This also warns (just once per key/type pair)
     outer.props.color = 'green';
@@ -275,8 +275,8 @@ describe('ReactElement', function() {
     outer.props.color = 'purple';
     outer.forceUpdate();
 
-    expect(console.error.argsForCall.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'Don\'t set .props.color of the React component <Outer />.'
     );
   });
@@ -301,15 +301,15 @@ describe('ReactElement', function() {
     expect(React.findDOMNode(outer).textContent).toBe('meow');
     expect(React.findDOMNode(outer).className).toBe('quack');
 
-    expect(console.error.argsForCall.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'Don\'t set .props.className of the React component <div />.'
     );
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'The element was created by Outer.'
     );
 
-    console.error.reset();
+    console.error.calls.reset();
 
     var newOuterEl = <Outer />;
     newOuterEl.props.sound = 'oink';
@@ -317,8 +317,8 @@ describe('ReactElement', function() {
     expect(React.findDOMNode(outer).textContent).toBe('oink');
     expect(React.findDOMNode(outer).className).toBe('quack');
 
-    expect(console.error.argsForCall.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'Don\'t set .props.sound of the React component <Outer />.'
     );
   });
@@ -332,7 +332,7 @@ describe('ReactElement', function() {
     });
     var test = ReactTestUtils.renderIntoDocument(<Test value={+undefined} />);
     expect(test.props.value).toBeNaN();
-    expect(console.error.argsForCall.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
   });
 
 });

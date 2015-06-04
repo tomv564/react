@@ -37,7 +37,7 @@ describe('findDOMNode', function() {
     expect(function() {
       React.findDOMNode({foo: 'bar'});
     })
-      .toThrow('Invariant Violation: Element appears to be neither ' +
+      .toThrowError('Invariant Violation: Element appears to be neither ' +
         'ReactComponent nor DOMNode (keys: foo)'
       );
   });
@@ -46,7 +46,7 @@ describe('findDOMNode', function() {
     expect(function() {
       React.findDOMNode({render: function() {}});
     })
-      .toThrow('Invariant Violation: Component (with keys: render) ' +
+      .toThrowError('Invariant Violation: Component (with keys: render) ' +
         'contains `render` method but is not mounted in the DOM'
       );
   });

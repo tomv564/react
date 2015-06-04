@@ -163,7 +163,7 @@ describe('ReactMultiChild', function() {
 
     beforeEach(function() {
       Object.defineProperty(Element.prototype, 'innerHTML', {
-        set: setInnerHTML = jasmine.createSpy().andCallFake(
+        set: setInnerHTML = jasmine.createSpy().and.callFake(
           innerHTMLDescriptor.set
         )
       });
@@ -190,7 +190,7 @@ describe('ReactMultiChild', function() {
         container
       );
       expect(setInnerHTML).toHaveBeenCalled();
-      var callCountOnMount = setInnerHTML.calls.length;
+      var callCountOnMount = setInnerHTML.calls.count();
 
       React.render(
         <div>
@@ -200,7 +200,7 @@ describe('ReactMultiChild', function() {
         </div>,
         container
       );
-      expect(setInnerHTML.calls.length).toBe(callCountOnMount + 1);
+      expect(setInnerHTML.calls.count()).toBe(callCountOnMount + 1);
     });
   });
 });

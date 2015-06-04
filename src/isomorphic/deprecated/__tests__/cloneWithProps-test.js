@@ -99,7 +99,7 @@ describe('cloneWithProps', function() {
 
     var component = ReactTestUtils.renderIntoDocument(<Grandparent />);
     expect(component.refs).toBe(emptyObject);
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
   });
 
   it('should transfer the key property', function() {

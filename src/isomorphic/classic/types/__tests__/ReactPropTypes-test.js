@@ -253,14 +253,14 @@ describe('ReactPropTypes', function() {
       var instance = <Component label={<div />} />;
       instance = ReactTestUtils.renderIntoDocument(instance);
 
-      expect(console.error.argsForCall.length).toBe(0);
+      expect(console.error.calls.count()).toBe(0);
     });
 
     it('should warn when passing no label and isRequired is set', () => {
       var instance = <Component />;
       instance = ReactTestUtils.renderIntoDocument(instance);
 
-      expect(console.error.argsForCall.length).toBe(1);
+      expect(console.error.calls.count()).toBe(1);
     });
 
     it('should be implicitly optional and not warn without values', function() {
@@ -388,7 +388,7 @@ describe('ReactPropTypes', function() {
         k4: null,
         k5: undefined
       }));
-      expect(console.error.calls).toEqual([]);
+      expect(console.error.calls.count()).toEqual(0);
 
       // This should also pass, though it warns
       typeCheckPass(PropTypes.node, {
@@ -749,9 +749,9 @@ describe('ReactPropTypes', function() {
       var instance = <Component num={5} />;
       instance = ReactTestUtils.renderIntoDocument(instance);
 
-      expect(spy.argsForCall.length).toBe(2); // temp double validation
-      expect(spy.argsForCall[0][1]).toBe('num');
-      expect(spy.argsForCall[0][2]).toBe('Component');
+      expect(spy.calls.count()).toBe(2); // temp double validation
+      expect(spy.calls.allArgs()[0][1]).toBe('num');
+      expect(spy.calls.allArgs()[0][2]).toBe('Component');
     });
 
     it('should have been called even if the prop is not present', function() {
@@ -767,11 +767,11 @@ describe('ReactPropTypes', function() {
       var instance = <Component bla={5} />;
       instance = ReactTestUtils.renderIntoDocument(instance);
 
-      expect(spy.argsForCall.length).toBe(2); // temp double validation
+      expect(spy.calls.count()).toBe(2); // temp double validation
     });
 
     it('should have received the validator\'s return value', function() {
-      var spy = jasmine.createSpy().andCallFake(
+      var spy = jasmine.createSpy().and.callFake(
         function(props, propName, componentName) {
           if (props[propName] !== 5) {
             return new Error('num must be 5!');
@@ -788,15 +788,15 @@ describe('ReactPropTypes', function() {
 
       var instance = <Component num={6} />;
       instance = ReactTestUtils.renderIntoDocument(instance);
-      expect(console.error.argsForCall.length).toBe(1);
-      expect(console.error.argsForCall[0][0]).toBe(
+      expect(console.error.calls.count()).toBe(1);
+      expect(console.error.calls.allArgs()[0][0]).toBe(
         'Warning: Failed propType: num must be 5!'
       );
     });
 
     it('should not warn if the validator returned null',
       function() {
-        var spy = jasmine.createSpy().andCallFake(
+        var spy = jasmine.createSpy().and.callFake(
           function(props, propName, componentName) {
             return null;
           }
@@ -811,7 +811,7 @@ describe('ReactPropTypes', function() {
 
         var instance = <Component num={5} />;
         instance = ReactTestUtils.renderIntoDocument(instance);
-        expect(console.error.argsForCall.length).toBe(0);
+        expect(console.error.calls.count()).toBe(0);
       }
     );
   });

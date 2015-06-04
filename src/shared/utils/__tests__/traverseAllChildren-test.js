@@ -28,7 +28,7 @@ describe('traverseAllChildren', function() {
   it('should support identity for simple', function() {
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(true);
       });
 
@@ -48,7 +48,7 @@ describe('traverseAllChildren', function() {
   it('should treat single arrayless child as being in array', function() {
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(true);
       });
 
@@ -66,7 +66,7 @@ describe('traverseAllChildren', function() {
   it('should treat single child in array as expected', function() {
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(true);
       });
 
@@ -90,7 +90,7 @@ describe('traverseAllChildren', function() {
 
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(true);
       });
 
@@ -131,7 +131,7 @@ describe('traverseAllChildren', function() {
 
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(true);
       });
 
@@ -151,7 +151,7 @@ describe('traverseAllChildren', function() {
 
     traverseAllChildren(instance.props.children, traverseFn, traverseContext);
 
-    expect(traverseFn.calls.length).toBe(9);
+    expect(traverseFn.calls.count()).toBe(9);
     expect(traverseContext.length).toEqual(9);
 
     expect(traverseFn).toHaveBeenCalledWith(
@@ -199,7 +199,7 @@ describe('traverseAllChildren', function() {
 
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(true);
       });
 
@@ -214,7 +214,7 @@ describe('traverseAllChildren', function() {
     );
 
     traverseAllChildren(instance.props.children, traverseFn, traverseContext);
-    expect(traverseFn.calls.length).toBe(6);
+    expect(traverseFn.calls.count()).toBe(6);
     expect(traverseContext.length).toEqual(6);
     expect(traverseFn).toHaveBeenCalledWith(
       traverseContext,
@@ -255,7 +255,7 @@ describe('traverseAllChildren', function() {
     var oneForceKey = <div key="keyOne" />;
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(true);
       });
 
@@ -298,7 +298,7 @@ describe('traverseAllChildren', function() {
 
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(kid);
       });
 
@@ -309,7 +309,7 @@ describe('traverseAllChildren', function() {
     );
 
     traverseAllChildren(instance.props.children, traverseFn, traverseContext);
-    expect(traverseFn.calls.length).toBe(3);
+    expect(traverseFn.calls.count()).toBe(3);
 
     expect(traverseFn).toHaveBeenCalledWith(
       traverseContext,
@@ -346,7 +346,7 @@ describe('traverseAllChildren', function() {
 
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(kid);
       });
 
@@ -357,7 +357,7 @@ describe('traverseAllChildren', function() {
     );
 
     traverseAllChildren(instance.props.children, traverseFn, traverseContext);
-    expect(traverseFn.calls.length).toBe(3);
+    expect(traverseFn.calls.count()).toBe(3);
 
     expect(traverseFn).toHaveBeenCalledWith(
       traverseContext,
@@ -397,7 +397,7 @@ describe('traverseAllChildren', function() {
 
     var traverseContext = [];
     var traverseFn =
-      jasmine.createSpy().andCallFake(function(context, kid, key, index) {
+      jasmine.createSpy().and.callFake(function(context, kid, key, index) {
         context.push(kid);
       });
 
@@ -408,7 +408,7 @@ describe('traverseAllChildren', function() {
     );
 
     traverseAllChildren(instance.props.children, traverseFn, traverseContext);
-    expect(traverseFn.calls.length).toBe(3);
+    expect(traverseFn.calls.count()).toBe(3);
 
     expect(traverseFn).toHaveBeenCalledWith(
       traverseContext,
@@ -426,8 +426,8 @@ describe('traverseAllChildren', function() {
       '.$#3:0'
     );
 
-    expect(console.error.argsForCall.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'Warning: Using Maps as children is not yet fully supported. It is an ' +
       'experimental feature that might be removed. Convert it to a sequence ' +
       '/ iterable of keyed ReactElements instead.'

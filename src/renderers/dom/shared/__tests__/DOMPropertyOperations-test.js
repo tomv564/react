@@ -60,8 +60,8 @@ describe('DOMPropertyOperations', function() {
         'tabindex',
         '1'
       )).toBe(null);
-      expect(console.error.argsForCall.length).toBe(1);
-      expect(console.error.argsForCall[0][0]).toContain('tabIndex');
+      expect(console.error.calls.count()).toBe(1);
+      expect(console.error.calls.allArgs()[0][0]).toContain('tabIndex');
     });
 
     it('should warn about class', function() {
@@ -70,8 +70,8 @@ describe('DOMPropertyOperations', function() {
         'class',
         'muffins'
       )).toBe(null);
-      expect(console.error.argsForCall.length).toBe(1);
-      expect(console.error.argsForCall[0][0]).toContain('className');
+      expect(console.error.calls.count()).toBe(1);
+      expect(console.error.calls.allArgs()[0][0]).toContain('className');
     });
 
     it('should create markup for boolean properties', function() {
@@ -204,8 +204,8 @@ describe('DOMPropertyOperations', function() {
         'xlinkHref',
         'about:blank'
       );
-      expect(stubNode.setAttributeNS.argsForCall.length).toBe(1);
-      expect(stubNode.setAttributeNS.argsForCall[0])
+      expect(stubNode.setAttributeNS.calls.count()).toBe(1);
+      expect(stubNode.setAttributeNS.calls.allArgs()[0])
         .toEqual(['http://www.w3.org/1999/xlink', 'xlink:href', 'about:blank']);
     });
 

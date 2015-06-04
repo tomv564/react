@@ -74,8 +74,8 @@ describe('ReactEmptyComponent', function() {
     });
     expect(function() {
       ReactTestUtils.renderIntoDocument(<Component />);
-    }).toThrow(
-      'Invariant Violation: Component.render(): A valid ReactComponent must ' +
+    }).toThrowError(
+       'Invariant Violation: Component.render(): A valid ReactComponent must ' +
       'be returned. You may have returned undefined, an array or some other ' +
       'invalid object.'
     );
@@ -100,11 +100,11 @@ describe('ReactEmptyComponent', function() {
       ReactTestUtils.renderIntoDocument(instance2);
     }).not.toThrow();
 
-    expect(console.log.argsForCall.length).toBe(4);
-    expect(console.log.argsForCall[0][0]).toBe(null);
-    expect(console.log.argsForCall[1][0].tagName).toBe('DIV');
-    expect(console.log.argsForCall[2][0].tagName).toBe('DIV');
-    expect(console.log.argsForCall[3][0]).toBe(null);
+    expect(console.log.calls.count()).toBe(4);
+    expect(console.log.calls.allArgs()[0][0]).toBe(null);
+    expect(console.log.calls.allArgs()[1][0].tagName).toBe('DIV');
+    expect(console.log.calls.allArgs()[2][0].tagName).toBe('DIV');
+    expect(console.log.calls.allArgs()[3][0]).toBe(null);
   });
 
   it('should distinguish between a script placeholder and an actual script tag',
@@ -129,11 +129,11 @@ describe('ReactEmptyComponent', function() {
         ReactTestUtils.renderIntoDocument(instance2);
       }).not.toThrow();
 
-      expect(console.log.argsForCall.length).toBe(4);
-      expect(console.log.argsForCall[0][0]).toBe(null);
-      expect(console.log.argsForCall[1][0].tagName).toBe('SCRIPT');
-      expect(console.log.argsForCall[2][0].tagName).toBe('SCRIPT');
-      expect(console.log.argsForCall[3][0]).toBe(null);
+      expect(console.log.calls.count()).toBe(4);
+      expect(console.log.calls.allArgs()[0][0]).toBe(null);
+      expect(console.log.calls.allArgs()[1][0].tagName).toBe('SCRIPT');
+      expect(console.log.calls.allArgs()[2][0].tagName).toBe('SCRIPT');
+      expect(console.log.calls.allArgs()[3][0]).toBe(null);
     }
   );
 
@@ -171,11 +171,11 @@ describe('ReactEmptyComponent', function() {
         ReactTestUtils.renderIntoDocument(instance2);
       }).not.toThrow();
 
-      expect(console.log.argsForCall.length).toBe(4);
-      expect(console.log.argsForCall[0][0].tagName).toBe('DIV');
-      expect(console.log.argsForCall[1][0]).toBe(null);
-      expect(console.log.argsForCall[2][0]).toBe(null);
-      expect(console.log.argsForCall[3][0].tagName).toBe('DIV');
+      expect(console.log.calls.count()).toBe(4);
+      expect(console.log.calls.allArgs()[0][0].tagName).toBe('DIV');
+      expect(console.log.calls.allArgs()[1][0]).toBe(null);
+      expect(console.log.calls.allArgs()[2][0]).toBe(null);
+      expect(console.log.calls.allArgs()[3][0].tagName).toBe('DIV');
     }
   );
 
@@ -227,7 +227,7 @@ describe('ReactEmptyComponent', function() {
     var div = document.createElement('div');
     expect(function() {
       React.render(null, div);
-    }).toThrow(
+    }).toThrowError(
       'Invariant Violation: React.render(): Invalid component element.'
     );
   });

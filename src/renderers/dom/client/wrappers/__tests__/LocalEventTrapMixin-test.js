@@ -37,7 +37,7 @@ describe('LocalEventTrapMixin', function() {
 
     expect(function() {
       ReactTestUtils.renderIntoDocument(<BadImage />);
-    }).toThrow(
+    }).toThrowError(
       'Invariant Violation: ' +
       'LocalEventTrapMixin.trapBubbledEvent(...): ' +
       'Requires node to be rendered.'

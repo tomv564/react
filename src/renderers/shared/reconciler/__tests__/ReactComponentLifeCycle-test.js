@@ -253,8 +253,8 @@ describe('ReactComponentLifeCycle', function() {
       }
     });
     ReactTestUtils.renderIntoDocument(<StatefulComponent />);
-    expect(console.error.calls.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toBe(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toBe(
       'Warning: setState(...): Can only update a mounted or ' +
       'mounting component. This usually means you called setState() on an ' +
       'unmounted component. This is a no-op.'
@@ -281,8 +281,8 @@ describe('ReactComponentLifeCycle', function() {
     var instance = ReactTestUtils.renderIntoDocument(element);
     expect(instance.isMounted()).toBeTruthy();
 
-    expect(console.error.argsForCall.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'Component is accessing isMounted inside its render()'
     );
   });
@@ -322,8 +322,8 @@ describe('ReactComponentLifeCycle', function() {
     });
 
     ReactTestUtils.renderIntoDocument(<Component />);
-    expect(console.error.argsForCall.length).toBe(1);
-    expect(console.error.argsForCall[0][0]).toContain(
+    expect(console.error.calls.count()).toBe(1);
+    expect(console.error.calls.allArgs()[0][0]).toContain(
       'Component is accessing getDOMNode or findDOMNode inside its render()'
     );
   });
@@ -485,7 +485,7 @@ describe('ReactComponentLifeCycle', function() {
       />;
     expect(function() {
       instance = ReactTestUtils.renderIntoDocument(instance);
-    }).toThrow(
+    }).toThrowError(
       'Invariant Violation: setProps(...): You called `setProps` on a ' +
       'component with a parent. This is an anti-pattern since props will get ' +
       'reactively updated when rendered. Instead, change the owner\'s ' +

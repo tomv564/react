@@ -238,7 +238,7 @@ describe('ReactTestUtils', function() {
     var div = ReactTestUtils.renderIntoDocument(<div />);
     expect(ReactTestUtils.isDOMComponent(div)).toBe(true);
 
-    expect(console.error.calls.length).toBe(0);
+    expect(console.error.calls.count()).toBe(0);
   });
 
   it('should support injected wrapper components as DOM components', function() {

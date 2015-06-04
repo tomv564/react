@@ -730,14 +730,14 @@ describe('OrderedMap', function() {
     }).not.toThrow();
     expect(function() {
       om.mapKeyRange(duplicate, 'x', 3, scope);
-    }).toThrow(
-      'Invariant Violation: mapKeyRange must be given keys ' +
+    }).toThrowError(
+       'Invariant Violation: mapKeyRange must be given keys ' +
       'that are present.'
     );
     expect(function() {
       om.forEachKeyRange(duplicate, 'x', 3, scope);
-    }).toThrow(
-      'Invariant Violation: forEachKeyRange must be given keys ' +
+    }).toThrowError(
+       'Invariant Violation: forEachKeyRange must be given keys ' +
       'that are present.'
     );
 

@@ -160,7 +160,7 @@ describe('ReactDOMTextarea', function() {
     stub = renderTextarea(stub);
     var node = React.findDOMNode(stub);
 
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
     expect(node.value).toBe('giraffe');
 
     // Changing children should do nothing, it functions like `defaultValue`.
@@ -171,14 +171,14 @@ describe('ReactDOMTextarea', function() {
   it('should allow numbers as children', function() {
     spyOn(console, 'error');
     var node = React.findDOMNode(renderTextarea(<textarea>{17}</textarea>));
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
     expect(node.value).toBe('17');
   });
 
   it('should allow booleans as children', function() {
     spyOn(console, 'error');
     var node = React.findDOMNode(renderTextarea(<textarea>{false}</textarea>));
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
     expect(node.value).toBe('false');
   });
 
@@ -190,7 +190,7 @@ describe('ReactDOMTextarea', function() {
       }
     };
     var node = React.findDOMNode(renderTextarea(<textarea>{obj}</textarea>));
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
     expect(node.value).toBe('sharkswithlasers');
   });
 
@@ -203,7 +203,7 @@ describe('ReactDOMTextarea', function() {
       );
     }).toThrow();
 
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
 
     var node;
     expect(function() {
@@ -212,7 +212,7 @@ describe('ReactDOMTextarea', function() {
 
     expect(node.value).toBe('[object Object]');
 
-    expect(console.error.argsForCall.length).toBe(2);
+    expect(console.error.calls.count()).toBe(2);
   });
 
   it('should support ReactLink', function() {

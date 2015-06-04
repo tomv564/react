@@ -30,7 +30,7 @@ function getRunnerWithResults(describeFunction) {
   var outerGetEnv = jasmine.getEnv;
   jasmine.getEnv = function() { return env; };
   // TODO: Bring over matchers from the existing environment.
-  var runner = env.currentRunner();
+  var runner = env.topSuite();
   try {
     env.describe('', describeFunction);
     env.execute();
@@ -96,30 +96,32 @@ function compareDescription(a, b) {
 
 function compareRunners(actual, expected) {
   return compareSpecs(
-    actual.specs().sort(compareDescription),
-    expected.specs().sort(compareDescription)
+    actual.children[0].children.sort(compareDescription),
+    expected.children[0].children.sort(compareDescription)
   );
 }
 
 var MetaMatchers = {
-  toEqualSpecsIn: function(expectedDescribeFunction) {
-    var actualDescribeFunction = this.actual;
-    if (typeof actualDescribeFunction !== 'function') {
-      throw Error('toEqualSpecsIn() should be used on a describe function');
-    }
-    if (typeof expectedDescribeFunction !== 'function') {
-      throw Error('toEqualSpecsIn() should be passed a describe function');
-    }
-    var actual = getRunnerWithResults(actualDescribeFunction);
-    var expected = getRunnerWithResults(expectedDescribeFunction);
-    var errorMessage = compareRunners(actual, expected);
-    this.message = function() {
-      return [
-        errorMessage,
-        'The specs are equal. Expected them to be different.'
-      ];
+  toEqualSpecsIn: function(util) {
+    return {
+      compare: function(actualDescribeFunction, expectedDescribeFunction) {
+
+        if (typeof actualDescribeFunction !== 'function') {
+          throw Error('toEqualSpecsIn() should be used on a describe function');
+        }
+        if (typeof expectedDescribeFunction !== 'function') {
+          throw Error('toEqualSpecsIn() should be passed a describe function');
+        }
+        var actual = getRunnerWithResults(actualDescribeFunction);
+        var expected = getRunnerWithResults(expectedDescribeFunction);
+        var errorMessage = compareRunners(actual, expected);
+        return {
+          pass : !errorMessage//,
+          // message:  [errorMessage,
+          //   'The specs are equal. Expected them to be different.']
+        };
+      }
     };
-    return !errorMessage;
   }
 };
 

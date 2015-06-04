@@ -58,7 +58,7 @@ describe('ReactCSSTransitionGroup', function() {
     }
 
     expect(React.findDOMNode(a).childNodes.length).toBe(2);
-    expect(console.error.argsForCall.length).toBe(1);
+    expect(console.error.calls.count()).toBe(1);
   });
 
   it('should keep both sets of DOM nodes around', function() {
