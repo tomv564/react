@@ -492,7 +492,7 @@ describe('ReactDOMComponent', function() {
       }).toThrowError(
         'Invariant Violation: ' +
         '`props.dangerouslySetInnerHTML` must be in the form `{__html: ...}`. ' +
-        'Please visit https://fb.me/react-invariant-dangerously-set-inner-html for more information.')
+        'Please visit https://fb.me/react-invariant-dangerously-set-inner-html for more information.'
       );
     });
 

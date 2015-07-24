@@ -116,9 +116,9 @@ var MetaMatchers = {
         var expected = getRunnerWithResults(expectedDescribeFunction);
         var errorMessage = compareRunners(actual, expected);
         return {
-          pass : !errorMessage//,
-          // message:  [errorMessage,
-          //   'The specs are equal. Expected them to be different.']
+          pass : !errorMessage,
+          message:  [errorMessage,
+             'The specs are equal. Expected them to be different.']
         };
       }
     };
